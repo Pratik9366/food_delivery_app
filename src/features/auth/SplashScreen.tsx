@@ -1,13 +1,23 @@
 
 import { splashStyles } from '@unistyles/authStyles';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { View, Text, StatusBar, Platform, Image, Alert } from 'react-native';
 import { useStyles } from 'react-native-unistyles';
 import  Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 import CustomText from '@components/global/CustomText';
+import { resetAndNavigate } from '@utils/NavigationUtils';
+import LoginScreen from './LoginScreen';
 
 const SplashScreen:FC = () => {
    const {styles} = useStyles(splashStyles)
+
+   useEffect(()=>{
+      const timeoutId = setTimeout(()=> {
+         resetAndNavigate('LoginScreen')
+      }, 3000)
+
+      return ()=> clearTimeout(timeoutId)
+   },[])
   
   return (
     <View style={styles.container}>
